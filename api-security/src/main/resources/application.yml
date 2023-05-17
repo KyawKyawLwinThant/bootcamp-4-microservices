@@ -1,0 +1,15 @@
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./auth_db;AUTO_SERVER=TRUE;NON_KEYWORDS=USER;
+    username: auth
+    password: auth
+    driver-class-name: org.h2.Driver
+  application:
+    name: api-service
+  sql:
+    init:
+      mode: always
+      platform: h2
+server:
+  port: 8090
