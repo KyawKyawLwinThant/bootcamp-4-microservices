@@ -80,6 +80,16 @@ public class AuthController {
                 user.getEmail()
         ) ;
     }
+    record RefreshResponse(String token){}
+    @PostMapping("/refresh")
+    public RefreshResponse
+        refresh(@CookieValue("refresh_token")String refreshToken){
+        System.out.println(refreshToken);
+        return new RefreshResponse(
+                authService.refreshAccess(refreshToken)
+                        .getAccessToken().getToken()
+        );
+    }
 
 
 
