@@ -9,6 +9,13 @@ create table if not exists user
 alter table if exists user
     add constraint if not exists uq_email unique (email);
 
+create table if not exists password_recovery(
+    id identity not null,
+    e varchar(255) not null,
+    user  bigint       not null,
+    constraint fk_password_recovery_user foreign key (user) references user (id)
+);
+
 create table if not exists token(
                                     id identity not null,
                                     refresh_token varchar(255) not null,
@@ -17,3 +24,4 @@ create table if not exists token(
                                     user bigint not null,
                                     constraint fk_token_user foreign key (user) references user(id)
 );
+

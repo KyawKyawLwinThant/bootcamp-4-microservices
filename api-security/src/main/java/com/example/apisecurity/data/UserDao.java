@@ -9,6 +9,11 @@ import java.util.Optional;
 
 public interface UserDao extends CrudRepository<User, Long> {
     Optional<User> findByEmail(String email);
+    @Query("""
+    select u.* from user u inner join password_recovery pr on u.id =pr.user
+    where pr.token =:token
+""")
+    Optional<User> findUserByPasswordRecoveryToken(@Param("token")String token);
 
     @Query("""
             select u.* from user u inner join token t on u.id =t.user
